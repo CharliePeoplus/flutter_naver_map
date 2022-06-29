@@ -294,41 +294,26 @@ class _NaverMapState extends State<NaverMap> {
     };
 
     if (defaultTargetPlatform == TargetPlatform.android) {
-      AndroidView view = AndroidView(
-        // virtual screen
+      return PlatformViewLink(
         viewType: VIEW_TYPE,
-        onPlatformViewCreated: onPlatformViewCreated,
-        creationParams: createParams,
-        creationParamsCodec: const StandardMessageCodec(),
-        gestureRecognizers: widget.forceGesture
-            ? (Set()
-              ..add(Factory<EagerGestureRecognizer>(
-                  () => EagerGestureRecognizer())))
-            : const <Factory<OneSequenceGestureRecognizer>>{},
+        surfaceFactory: (context, controller) => AndroidViewSurface(
+          controller: controller as AndroidViewController,
+          hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+          gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
+        ),
+        onCreatePlatformView: (params) {
+          return PlatformViewsService.initSurfaceAndroidView(
+            id: params.id,
+            viewType: params.viewType,
+            creationParams: createParams,
+            creationParamsCodec: const StandardMessageCodec(),
+            layoutDirection: TextDirection.ltr,
+          )
+            ..addOnPlatformViewCreatedListener(onPlatformViewCreated)
+            ..create();
+        },
       );
-      return view;
 
-      /// todo: waiting for most people use flutter version higher than 1.22.2
-      /// hybrid composition
-      // return PlatformViewLink(
-      //   viewType: VIEW_TYPE,
-      //   surfaceFactory: (context, controller) => AndroidViewSurface(
-      //     controller: controller,
-      //     hitTestBehavior: PlatformViewHitTestBehavior.opaque,
-      //     gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
-      //   ),
-      //   onCreatePlatformView: (params) {
-      //     return PlatformViewsService.initSurfaceAndroidView(
-      //       id: params.id,
-      //       viewType: params.viewType,
-      //       creationParams: createParams,
-      //       creationParamsCodec: const StandardMessageCodec(),
-      //       layoutDirection: TextDirection.ltr,
-      //     )
-      //       ..addOnPlatformViewCreatedListener(onPlatformViewCreated)
-      //       ..create();
-      //   },
-      // );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       final view = UiKitView(
         viewType: VIEW_TYPE,
