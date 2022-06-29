@@ -302,7 +302,7 @@ class _NaverMapState extends State<NaverMap> {
           gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
         ),
         onCreatePlatformView: (params) {
-          return PlatformViewsService.initSurfaceAndroidView(
+          return PlatformViewsService.initExpensiveAndroidView(
             id: params.id,
             viewType: params.viewType,
             creationParams: createParams,
@@ -313,7 +313,6 @@ class _NaverMapState extends State<NaverMap> {
             ..create();
         },
       );
-
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       final view = UiKitView(
         viewType: VIEW_TYPE,
