@@ -294,25 +294,38 @@ class _NaverMapState extends State<NaverMap> {
     };
 
     if (defaultTargetPlatform == TargetPlatform.android) {
-      return PlatformViewLink(
+      return AndroidView(
+        // virtual screen
         viewType: VIEW_TYPE,
-        surfaceFactory: (context, controller) => AndroidViewSurface(
-          controller: controller as AndroidViewController,
-          hitTestBehavior: PlatformViewHitTestBehavior.translucent,
-          gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
-        ),
-        onCreatePlatformView: (params) {
-          return PlatformViewsService.initExpensiveAndroidView(
-            id: params.id,
-            viewType: params.viewType,
-            creationParams: createParams,
-            creationParamsCodec: const StandardMessageCodec(),
-            layoutDirection: TextDirection.ltr,
-          )
-            ..addOnPlatformViewCreatedListener(onPlatformViewCreated)
-            ..create();
-        },
+        onPlatformViewCreated: onPlatformViewCreated,
+        creationParams: createParams,
+        creationParamsCodec: const StandardMessageCodec(),
+        gestureRecognizers: widget.forceGesture
+            ? (Set()
+              ..add(Factory<EagerGestureRecognizer>(
+                  () => EagerGestureRecognizer())))
+            : const <Factory<OneSequenceGestureRecognizer>>{},
       );
+
+      // return PlatformViewLink(  // 지도성능 좋아지는 대신 UI 가 버벅이게 됨.
+      //   viewType: VIEW_TYPE,
+      //   surfaceFactory: (context, controller) => AndroidViewSurface(
+      //     controller: controller as SurfaceAndroidViewController,
+      //     hitTestBehavior: PlatformViewHitTestBehavior.opaque,
+      //     gestureRecognizers: const <Factory<OneSequenceGestureRecognizer>>{},
+      //   ),
+      //   onCreatePlatformView: (params) {
+      //     return PlatformViewsService.initSurfaceAndroidView(
+      //       id: params.id,
+      //       viewType: params.viewType,
+      //       creationParams: createParams,
+      //       creationParamsCodec: const StandardMessageCodec(),
+      //       layoutDirection: TextDirection.ltr,
+      //     )
+      //       ..addOnPlatformViewCreatedListener(onPlatformViewCreated)
+      //       ..create();
+      //   },
+      // );
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       final view = UiKitView(
         viewType: VIEW_TYPE,
