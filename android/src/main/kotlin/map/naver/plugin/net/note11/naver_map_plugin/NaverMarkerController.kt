@@ -40,10 +40,10 @@ class NaverMarkerController(
             handler.post {
                 val markers: List<MarkerController?> = idToController.values.toList()
                 for (marker in markers) {
-                    marker!!.setMap(naverMap)
+                   marker!!.setMap(naverMap)
                 }
-                service.shutdown()
             }
+            service.shutdown()
         }
        
     }
