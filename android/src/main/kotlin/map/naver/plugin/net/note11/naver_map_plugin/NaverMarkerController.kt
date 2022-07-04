@@ -42,8 +42,9 @@ class NaverMarkerController(
                 for (marker in markers) {
                    marker!!.setMap(naverMap)
                 }
+                service.shutdown()
             }
-            service.shutdown()
+            
         }
        
     }
