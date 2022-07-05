@@ -29,24 +29,16 @@ class NaverMarkerController(
     private var markerIdOfInfoWindow: String? = null
     fun add(jsonArray: List<Any?>?) {
         if (jsonArray == null || jsonArray.isEmpty()) return
-        val service = Executors.newCachedThreadPool()
-        service.execute {
             for (json in jsonArray) {
                 val data = json as HashMap<String, Any>
                 val marker = MarkerController(data)
                 marker.setOnClickListener(onClickListener)
                 idToController[marker.id] = marker
             }
-            handler.post {
-                val markers: List<MarkerController?> = idToController.values.toList()
-                for (marker in markers) {
-                   marker!!.setMap(naverMap)
-                }
-                service.shutdown()
+            val markers: List<MarkerController?> = idToController.values.toList()
+            for (marker in markers) {
+               marker!!.setMap(naverMap)
             }
-            
-        }
-       
     }
 
     fun remove(jsonArray: List<Any?>?) {
