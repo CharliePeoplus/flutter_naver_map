@@ -1,8 +1,7 @@
-
 part of flutter_naver_map;
 
 /// 지도의 유형을 지정하는 enum.
-/// 네이버 SDK가 지원하는 지도 유형은 5가지 입니다. [MapType.Basic], [MapType.Navi],
+/// 네이버 SDK가 지원하는 지도 유형은 6가지 입니다. [MapType.Basic], [MapType.Navi],
 /// [MapType.Satellite], [MapType.Hybrid], [MapType.Terrain]
 enum MapType {
   /// 일반 지도입니다. 하천, 녹지, 도로, 심벌 등 다양한 정보를 노출합니다.
@@ -19,6 +18,9 @@ enum MapType {
 
   /// 지형도입니다. 산악 지형을 실제 지형과 유사하게 입체적으로 표현합니다.
   Terrain,
+
+  /// 지도를 나타내지 않습니다.
+  None,
 }
 
 /// 레이어 그룹은 지도 유형과 달리 동시에 두 개 이상을 활성화할 수 있습니다.
