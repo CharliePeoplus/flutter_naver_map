@@ -67,7 +67,7 @@ class NPolygonController: NSObject {
     
     func setMap(_ map: NMFNaverMapView?) {
         polygonOverlay.polygon.exteriorRing.points.forEach { point in
-            print(point)
+            // print(point)
             if let latlng = point as? NMGLatLng {
                 // print("lat: \(latlng.lat), lng: \(latlng.lng)")
             }
