@@ -69,7 +69,7 @@ class NPolygonController: NSObject {
         polygonOverlay.polygon.exteriorRing.points.forEach { point in
             print(point)
             if let latlng = point as? NMGLatLng {
-                print("lat: \(latlng.lat), lng: \(latlng.lng)")
+                // print("lat: \(latlng.lat), lng: \(latlng.lng)")
             }
         }
         polygonOverlay.mapView = map?.mapView
