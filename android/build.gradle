@@ -46,11 +46,18 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    
     dependencies {
         // 네이버 지도 SDK
         implementation 'com.naver.maps:map-sdk:3.16.1'
         implementation 'com.google.android.gms:play-services-location:20.0.0'
     }
+
+    ㅏㅐ
 }
 dependencies {
     implementation "androidx.core:core-ktx:1.8.0"
