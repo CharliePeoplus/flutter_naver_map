@@ -7,7 +7,6 @@ import android.graphics.Color
 import com.naver.maps.map.CameraPosition
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.overlay.OverlayImage
-import io.flutter.view.FlutterMain
 import kotlin.math.roundToInt
 
 object Convert {
@@ -156,8 +155,7 @@ object Convert {
 
     fun toOverlayImage(o: Any?): OverlayImage { // todo : bitmap support
         val assetName = o as String
-        val key = FlutterMain.getLookupKeyForAsset(assetName)
-        return OverlayImage.fromAsset(key)
+        return OverlayImage.fromAsset(assetName)
     }
 
     fun toOverlayImageFromPath(o: Any?): OverlayImage {

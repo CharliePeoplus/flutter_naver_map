@@ -7,7 +7,7 @@ import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import android.os.Bundle
-import io.flutter.plugin.common.PluginRegistry.Registrar
+// import io.flutter.plugin.common.PluginRegistry.Registrar
 import java.util.concurrent.atomic.AtomicInteger
 
 /** NaverMapPlugin  */
@@ -122,28 +122,28 @@ class NaverMapPlugin : FlutterPlugin, ActivityLifecycleCallbacks, ActivityAware 
         const val SAVE_INSTANCE_STATE = 6
         const val DESTROYED = 7
 
-        // 플러그인 등록 (Legacy)
-        fun registerWith(registrar: Registrar) {
-            val registrarActivity = registrar.activity() as Activity;
-            if (registrarActivity == null) {
-                // 백그라운드에서 플러그인을 등록하려고 시도할때 엑티비티는 존재하지 않습니다.
-                // 이 플러그인이 포어그라운드에서만 돌아가기 때문에 백그라운드에서 등록하는 것을 막습니다.
-                return
-            }
+        // // 플러그인 등록 (Legacy)
+        // fun registerWith(registrar: Registrar) {
+        //     val registrarActivity = registrar.activity() as Activity;
+        //     if (registrarActivity == null) {
+        //         // 백그라운드에서 플러그인을 등록하려고 시도할때 엑티비티는 존재하지 않습니다.
+        //         // 이 플러그인이 포어그라운드에서만 돌아가기 때문에 백그라운드에서 등록하는 것을 막습니다.
+        //         return
+        //     }
           
-            val plugin = NaverMapPlugin(registrarActivity)
-            registrarActivity.application.registerActivityLifecycleCallbacks(plugin)
-            // 라이프사이클 콜백
-            registrar
-                .platformViewRegistry()
-                .registerViewFactory(
-                    "naver_map_plugin",
-                    NaverMapFactory(
-                        plugin.state,
-                        registrar.messenger(),
-                        registrarActivity
-                    )
-                )
-        }
+        //     val plugin = NaverMapPlugin(registrarActivity)
+        //     registrarActivity.application.registerActivityLifecycleCallbacks(plugin)
+        //     // 라이프사이클 콜백
+        //     registrar
+        //         .platformViewRegistry()
+        //         .registerViewFactory(
+        //             "naver_map_plugin",
+        //             NaverMapFactory(
+        //                 plugin.state,
+        //                 registrar.messenger(),
+        //                 registrarActivity
+        //             )
+        //         )
+        // }
     }
 }
