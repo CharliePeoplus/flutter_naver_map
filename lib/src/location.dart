@@ -32,7 +32,7 @@ class LatLng {
   }
 
   @override
-  int get hashCode => hashValues(latitude, longitude);
+  int get hashCode => Object.hash(latitude, longitude);
 
   /// 다른 좌표와의 거리를 반환합니다.
   /// [other] : 거리를 잴 다른 좌표
@@ -131,7 +131,7 @@ class LatLngBounds {
   }
 
   @override
-  int get hashCode => hashValues(southwest, northeast);
+  int get hashCode => Object.hash(southwest, northeast);
 }
 //
 //List<Map<String, double>> _serializeLatLngList(List<LatLng> locations) {
